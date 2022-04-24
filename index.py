@@ -17,7 +17,7 @@ def play():
 
 @app.route("/pause")
 def pause():
-    sonos.pause()
+    sonos.volume = 1
     return "Ok"
 
 
@@ -49,6 +49,7 @@ def info():
 def index():
     track = sonos.get_current_track_info()
     return render_template("index.html", track=track)
+
 
 
 if __name__ == "__main__":
