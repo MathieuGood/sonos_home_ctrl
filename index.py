@@ -5,6 +5,8 @@ from soco import SoCo
 app = Flask(__name__)
 
 sonos = SoCo("192.168.1.30")
+print(sonos)
+print(sonos.volume)
 
 
 @app.route("/play")
@@ -15,7 +17,7 @@ def play():
 
 @app.route("/pause")
 def pause():
-    sonos.pause()
+    sonos.volume = 1
     return "Ok"
 
 
