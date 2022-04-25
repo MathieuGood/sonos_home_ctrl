@@ -6,7 +6,7 @@ app = Flask(__name__)
 
 app.config.from_pyfile("settings.py")
 
-sonos = SoCo(app.config["192.168.1.30"])
+sonos = SoCo("192.168.1.30")
 
 
 @app.route("/play")
@@ -17,7 +17,7 @@ def play():
 
 @app.route("/pause")
 def pause():
-    sonos.volume = 1
+    sonos.pause()
     return "Ok"
 
 
@@ -49,8 +49,6 @@ def info():
 def index():
     track = sonos.get_current_track_info()
     return render_template("index.html", track=track)
-
-
 
 if __name__ == "__main__":
     app.run(debug=True)
