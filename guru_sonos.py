@@ -51,7 +51,6 @@ def print_status():
     print(sep_line)
 
 
-
 def spk_vol():
     for spk in zlist:
         print(spk._player_name, dash(name_box_length(spk)), "Vol", spk.volume)
@@ -59,6 +58,7 @@ def spk_vol():
             spk.volume = int(input("Enter volume level >>> "))
         except:
             print("Volume", unch)
+
 
 def bass_lvl():
     for spk in zlist:
@@ -68,6 +68,7 @@ def bass_lvl():
         except:
             print("Bass", unch)
 
+
 def treble_lvl():
     for spk in zlist:
         print(spk._player_name, dash(name_box_length(spk)), "Treb", spk.treble)
@@ -76,13 +77,16 @@ def treble_lvl():
         except:
             print("Treble", unch)
 
+
 def loudness_off():
     for spk in zlist:
         spk.loudness = False
 
+
 def loudness_on():
     for spk in zlist:
         spk.loudness = True
+
 
 def usual_eq():
     loudness_on()
@@ -105,6 +109,7 @@ def silent_mode():
         if spk.night_mode is not None:
             spk.night_mode = True
 
+
 def master_vol():
     try:
         v = input("How much?")
@@ -115,6 +120,7 @@ def master_vol():
         volume_balance(v)
     except:
         print(guru_error)
+
 
 def volume_balance(v):
     front.volume = v
@@ -129,6 +135,7 @@ def dialog_switch():
                 spk.dialog_mode = False
             else:
                 spk.dialog_mode = True
+
 
 def gurumenu():
     print_status()
@@ -174,5 +181,6 @@ def gurumenu():
         except:
             print(guru_error)
     gurumenu()
+
 
 gurumenu()
