@@ -15,6 +15,7 @@ sep_line = line_length * "#"
 unch = "level unchanged"
 guru_error = "That's not what I call a proper quest... Try again!\n"
 
+
 def name_box_length(spk):
     namebox_l = (line_length - 39 - (len(spk._player_name)))
     return namebox_l

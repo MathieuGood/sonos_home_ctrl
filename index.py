@@ -4,8 +4,6 @@ from soco import SoCo
 
 app = Flask(__name__)
 
-app.config.from_pyfile("settings.py")
-
 sonos = SoCo("192.168.1.30")
 
 
@@ -49,6 +47,7 @@ def info():
 def index():
     track = sonos.get_current_track_info()
     return render_template("index.html", track=track)
+
 
 if __name__ == "__main__":
     app.run(debug=True)
