@@ -124,7 +124,7 @@ def master_vol():
 
 def volume_balance(v):
     front.volume = v
-    back.volume = v * 1.1
+    back.volume = v * 1
     side.volume = v * 0.8
 
 
