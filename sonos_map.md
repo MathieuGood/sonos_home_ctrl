@@ -10,4 +10,5 @@
     - Entrer équilibre des spk
         - Demander quel est le spk maître ou référent
         - Demander plus ou moins fort par rapport au référent
-        
+        - Enregistrer dans fichier de config
+
