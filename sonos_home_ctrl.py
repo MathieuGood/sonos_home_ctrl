@@ -17,10 +17,13 @@ def get_spk_detail(spk):
 
 
 def main():
+    
     all_spk = get_spk_list()
+    
+    if all_spk != None:
 
-    for one in all_spk:
-        print(get_spk_detail(one))
+        for one in all_spk:
+            print(get_spk_detail(one))
 
 
 
