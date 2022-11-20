@@ -1,5 +1,7 @@
 import soco
+from soco import SoCo
 import csv
+import json
 
 # Global variables
 config_file = 'sonos_config.cfg'
@@ -8,13 +10,6 @@ config_file = 'sonos_config.cfg'
 def menu():
 
     print('\n🔈 Sonos Home Control 🔈\n')
-
-
-
-def save_cfg(input_list):
-    with open(config_file, 'w') as cfg_file:
-        csvwriter = csv.writer(cfg_file)
-        csvwriter.writerows(input_list)
 
 
 def get_spk_list():
@@ -28,14 +23,26 @@ def get_spk_list():
 def get_spk_detail(spk):
     name = spk.player_name
     ip = spk.ip_address
-    return name, ip
+    vol = spk.volume
+    bass = spk.bass
+    treb = spk.treble
+    return {name: {'ip': ip, 'vol': vol, 'bass': bass, 'treb': treb}}
 
 
 def get_cfg(spk_list):
     output_list = []
     for spk in spk_list:
-        output_list.append(get_spk_detail(spk))
+        spk_detail = get_spk_detail(spk)
+        output_list.append(spk_detail)
+        print(output_list)
+
     return output_list
+
+
+def write_cfg(list_cfg):
+    json_cfg = json.dumps(list_cfg, indent=4)
+    with open("sonos_cfg.json", "w") as outfile:
+        outfile.write(json_cfg)
 
 
 def read_cfg(config_file):
@@ -82,13 +89,14 @@ def main():
     
     all_spk = get_spk_list()
 
+    spk_cfg = get_cfg(all_spk)
+ 
+    write_cfg(spk_cfg)
+
     menu()
 
     balance_cfg = set_balance_cfg(all_spk)
     set_spk_balance(balance_cfg)
-
-    spk_cfg = get_cfg(all_spk)
-    save_cfg(spk_cfg)
 
 
 
