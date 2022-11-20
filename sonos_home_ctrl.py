@@ -34,27 +34,23 @@ def get_cfg(spk_list):
     for spk in spk_list:
         spk_detail = get_spk_detail(spk)
         output_list.append(spk_detail)
-        print(output_list)
-
     return output_list
 
 
-def write_cfg(list_cfg):
+def write_cfg(list_cfg, file=config_file):
     json_cfg = json.dumps(list_cfg, indent=4)
-    with open("sonos_cfg.json", "w") as outfile:
+    with open(file, "w") as outfile:
         outfile.write(json_cfg)
 
 
-def read_cfg(config_file):
-    with open(config_file, 'r') as cfg_file:
-        csvfile = csv.reader(cfg_file)
-        output_list = list(csvfile)
-        return output_list
+def open_cfg(file=config_file):
+    with open(file, 'r') as json_file:
+        return json.load(json_file)
 
 
 def load_cfg(config_file):
     for spk in config_file:
-        spk[0]
+        ...
 
 
 
@@ -93,11 +89,12 @@ def main():
  
     write_cfg(spk_cfg)
 
+    print(open_cfg())
+
     menu()
 
     balance_cfg = set_balance_cfg(all_spk)
     set_spk_balance(balance_cfg)
-
 
 
 
