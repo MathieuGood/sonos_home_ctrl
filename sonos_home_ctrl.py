@@ -34,6 +34,7 @@ def get_cfg(spk_list):
     for spk in spk_list:
         spk_detail = get_spk_detail(spk)
         output_list.append(spk_detail)
+    print(output_list)
     return output_list
 
 
@@ -51,11 +52,16 @@ def open_cfg(file=config_file):
 def load_cfg(cfg):
     cfg_out = []
     for spk in cfg:
-        spk_obj = SoCo(spk[1]['ip'])
-        cfg_out.append([spk[0], spk_obj, spk[1]])
+        cfg_out.append([spk[0], spk[1]])
     print(cfg_out)
     return cfg_out
 
+
+def set_cfg(cfg):
+    for spk in cfg:
+        s = SoCo(spk[1]['ip'])
+        s.bass = spk[1]['bass']
+        s.treble = spk[1]['treb']
 
 
 def choose_spk(spk_list):
@@ -75,7 +81,6 @@ def set_balance_cfg(spk_list):
             multi = float(input(f'Enter volume multiplier for {spk.player_name}'))
             balance_cfg.append([spk, multi])
     print(balance_cfg)
-
     return balance_cfg
     
 
