@@ -4,7 +4,7 @@ import csv
 import json
 
 # Global variables
-config_file = 'sonos_config.cfg'
+config_file = 'sonos_cfg.json'
 
 
 def menu():
@@ -26,7 +26,7 @@ def get_spk_detail(spk):
     vol = spk.volume
     bass = spk.bass
     treb = spk.treble
-    return {name: {'ip': ip, 'vol': vol, 'bass': bass, 'treb': treb}}
+    return [name, {'ip': ip, 'vol': vol, 'bass': bass, 'treb': treb}]
 
 
 def get_cfg(spk_list):
@@ -38,7 +38,7 @@ def get_cfg(spk_list):
 
 
 def write_cfg(list_cfg, file=config_file):
-    json_cfg = json.dumps(list_cfg, indent=4)
+    json_cfg = json.dumps(list_cfg, indent=4, ensure_ascii=False)
     with open(file, "w") as outfile:
         outfile.write(json_cfg)
 
@@ -48,9 +48,13 @@ def open_cfg(file=config_file):
         return json.load(json_file)
 
 
-def load_cfg(config_file):
-    for spk in config_file:
-        ...
+def load_cfg(cfg):
+    cfg_out = []
+    for spk in cfg:
+        spk_obj = SoCo(spk[1]['ip'])
+        cfg_out.append([spk[0], spk_obj, spk[1]])
+    print(cfg_out)
+    return cfg_out
 
 
 
@@ -63,11 +67,12 @@ def choose_spk(spk_list):
 
 
 def set_balance_cfg(spk_list):
+    print('Select master speaker :')
     master = choose_spk(spk_list)
     balance_cfg = [[master, 1]]
     for spk in spk_list:
         if spk != master:
-            multi = float(input(f'Enter volume multiplicator for {spk.player_name}'))
+            multi = float(input(f'Enter volume multiplier for {spk.player_name}'))
             balance_cfg.append([spk, multi])
     print(balance_cfg)
 
@@ -89,12 +94,14 @@ def main():
  
     write_cfg(spk_cfg)
 
-    print(open_cfg())
-
     menu()
 
-    balance_cfg = set_balance_cfg(all_spk)
-    set_spk_balance(balance_cfg)
+    config = open_cfg()
+
+    load_cfg(config)
+
+    # balance_cfg = set_balance_cfg(all_spk)
+    # set_spk_balance(balance_cfg)
 
 
 
