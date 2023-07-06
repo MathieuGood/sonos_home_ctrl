@@ -45,6 +45,7 @@ def write_cfg(list_cfg, file=config_file):
 
 
 def open_cfg(file=config_file):
+    a = input('Wait')
     with open(file, 'r') as json_file:
         return json.load(json_file)
 
@@ -103,7 +104,7 @@ def main():
 
     config = open_cfg()
 
-    load_cfg(config)
+    set_cfg(load_cfg(config))
 
     # balance_cfg = set_balance_cfg(all_spk)
     # set_spk_balance(balance_cfg)
