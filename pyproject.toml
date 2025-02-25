@@ -1,0 +1,10 @@
+[project]
+name = "sonos-home-ctrl"
+version = "0.1.0"
+description = "Controller for Sonos devices in your home"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "soco>=0.30.9",
+    "streamlit>=1.42.2",
+]
